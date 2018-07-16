@@ -20,7 +20,7 @@ Usage
 <dependency>
     <groupId>com.github.vlsi.mxgraph</groupId>
     <artifactId>jgraphx</artifactId>
-    <version>3.9.8</version>
+    <version>3.9.8.1</version>
 </dependency>
 ```
 
