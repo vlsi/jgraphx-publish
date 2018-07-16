@@ -1,0 +1,6 @@
+rootProject.name = 'jgraphx-publish'
+include ':jgraphx'
+include ':examples'
+
+project(':jgraphx').projectDir = "$rootDir/jgraphx" as File
+project(':examples').projectDir = "$rootDir/examples" as File

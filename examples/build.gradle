@@ -1,0 +1,27 @@
+description = 'jgraphx-examples'
+dependencies {
+  compile project(':jgraphx')
+}
+
+sourceSets {
+  main {
+    java {
+      srcDirs = [
+          "$projectDir/../jgraphx_src/examples"
+      ]
+      exclude '**/resources/'
+      exclude '**/*.png'
+      exclude '**/*.gif'
+      exclude '**/*.xml'
+    }
+    resources {
+      srcDirs = [
+          "$projectDir/../jgraphx_src/examples"
+      ]
+      include '**/resources/'
+      include '**/*.png'
+      include '**/*.gif'
+      include '**/*.xml'
+    }
+  }
+}

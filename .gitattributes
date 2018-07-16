@@ -1,0 +1,9 @@
+* text=auto
+*.java text
+*.md text
+*.sql text
+*.sh text eol=lf
+*.bat text eol=crlf
+*.xml text
+*.yaml text
+*.yml text

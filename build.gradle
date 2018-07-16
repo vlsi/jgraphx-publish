@@ -1,0 +1,48 @@
+plugins {
+  id 'io.codearte.nexus-staging' version '0.11.0'
+}
+
+allprojects {
+  apply plugin: 'maven'
+
+  group = 'com.github.vlsi.mxgraph'
+  version = '3.9.8'
+}
+
+subprojects {
+  apply plugin: 'java'
+  sourceCompatibility = 1.5
+  targetCompatibility = 1.5
+  tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+  }
+
+  repositories {
+    mavenLocal()
+
+    maven { url "http://repo.maven.apache.org/maven2" }
+  }
+
+  task sourcesJar(type: Jar) {
+    classifier 'sources'
+    from sourceSets.main.allJava
+    extension 'jar'
+  }
+
+  task javadocJar(type: Jar) {
+    classifier 'javadoc'
+    from javadoc
+  }
+
+  artifacts {
+    archives javadocJar, sourcesJar
+  }
+
+  javadoc {
+    failOnError = false
+    title = "jgraphx ${project.version}"
+    options {
+      header "jgraphx ${project.version}"
+    }
+  }
+}

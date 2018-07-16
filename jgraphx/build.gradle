@@ -1,0 +1,95 @@
+plugins {
+  id 'java-library'
+  id 'maven-publish'
+  id 'signing'
+  id 'osgi'
+}
+
+description = 'jgraphx'
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+
+// Use nexus-staging-plugin to workaround https://issues.sonatype.org/browse/OSSRH-5454
+nexusStaging {
+  delayBetweenRetriesInMillis = 30000
+  stagingProfileId = "77ffab7dd156731e"
+}
+
+sourceSets {
+  main {
+    java {
+      srcDirs = [
+          "$projectDir/../jgraphx_src/src"
+      ]
+      exclude '**/resources/'
+      exclude '**/*.png'
+      exclude '**/*.xml'
+    }
+    resources {
+      srcDirs = [
+          "$projectDir/../jgraphx_src/src"
+      ]
+      include '**/resources/'
+      include '**/*.png'
+      include '**/*.xml'
+    }
+  }
+}
+
+jar {
+  manifest {
+    attributes 'Main-Class': 'com.mxgraph.view.mxGraph'
+    instruction 'Bundle-Vendor', 'Vladimir Sitnikov'
+    instruction 'Bundle-Description', 'JGraphX: a Java Swing diagramming (graph visualisation) library'
+    instruction 'Bundle-DocURL', 'https://github.com/vlsi/jgraphx-package'
+    instruction 'Automatic-Module-Name', 'com.github.vlsi.mxgraph.jgraphx'
+  }
+}
+
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      artifactId = 'jgraphx'
+      from components.java
+      artifact sourcesJar
+      artifact javadocJar
+      pom {
+        name = 'jgraphx'
+        description = 'JGraphX is a Java Swing diagramming (graph visualisation) library'
+        url = 'https://github.com/vlsi/jgraphx-publish'
+        licenses {
+          license {
+            name = 'BSD'
+            url = 'https://github.com/vlsi/jgraphx-publish/LICENSE'
+          }
+        }
+        scm {
+          connection = 'scm:git:https://github.com/vlsi/jgraphx-publish.git'
+          url = 'https://github.com/vlsi/jgraphx-publish'
+        }
+      }
+    }
+  }
+  repositories {
+    maven {
+      // change URLs to point to your repos, e.g. http://my.org/repo
+      url = ('https://oss.sonatype.org/content/repositories/' + (version.endsWith('SNAPSHOT') ? 'snapshots/' : 'releases/'))
+      credentials {
+        username = getProperty('nexusStaging.username')
+        password = getProperty('nexusStaging.password')
+      }
+    }
+  }
+}
+
+signing {
+  required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+  sign publishing.publications.mavenJava
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+    }
+  }
+}
