@@ -20,17 +20,12 @@ sourceSets {
       srcDirs = [
           "$projectDir/../jgraphx_src/src"
       ]
-      exclude '**/resources/'
-      exclude '**/*.png'
-      exclude '**/*.xml'
     }
     resources {
       srcDirs = [
           "$projectDir/../jgraphx_src/src"
       ]
-      include '**/resources/'
-      include '**/*.png'
-      include '**/*.xml'
+      exclude '**/*.java'
     }
   }
 }
