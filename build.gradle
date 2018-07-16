@@ -6,7 +6,7 @@ allprojects {
   apply plugin: 'maven'
 
   group = 'com.github.vlsi.mxgraph'
-  version = '3.9.8'
+  version = '3.9.8.1'
 }
 
 subprojects {
