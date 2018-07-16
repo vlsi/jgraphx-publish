@@ -7,6 +7,7 @@ plugins {
 
 description = 'jgraphx'
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+ext.hasCredentials = hasProperty('nexusStaging.username')
 
 // Use nexus-staging-plugin to workaround https://issues.sonatype.org/browse/OSSRH-5454
 nexusStaging {
@@ -57,6 +58,21 @@ publishing {
             url = 'https://github.com/vlsi/jgraphx-publish/LICENSE'
           }
         }
+        developers {
+          developer {
+            id = 'alderg'
+            name = 'Gaudenz Alder'
+          }
+          developer {
+            id = 'davidjgraph'
+            name = 'David Benson'
+          }
+          developer {
+            id = 'vlsi'
+            name = 'Vladimir Sitnikov'
+            email = 'sitnikov.vladimir@gmail.com'
+          }
+        }
         scm {
           connection = 'scm:git:https://github.com/vlsi/jgraphx-publish.git'
           url = 'https://github.com/vlsi/jgraphx-publish'
@@ -64,13 +80,17 @@ publishing {
       }
     }
   }
-  repositories {
-    maven {
-      // change URLs to point to your repos, e.g. http://my.org/repo
-      url = ('https://oss.sonatype.org/content/repositories/' + (version.endsWith('SNAPSHOT') ? 'snapshots/' : 'releases/'))
-      credentials {
-        username = getProperty('nexusStaging.username')
-        password = getProperty('nexusStaging.password')
+  if (hasCredentials) {
+    repositories {
+      maven {
+        // change URLs to point to your repos, e.g. http://my.org/repo
+        def snapshotUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
+        def releaseUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+        url = version.endsWith('SNAPSHOT') ? snapshotUrl : releaseUrl
+        credentials {
+          username = getProperty('nexusStaging.username')
+          password = getProperty('nexusStaging.password')
+        }
       }
     }
   }
