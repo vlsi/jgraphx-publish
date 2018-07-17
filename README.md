@@ -12,6 +12,7 @@ Value added by `jgraph-publish`:
 * jar, javadoc, and sources are published to Maven Central 
 * Gradle build (the code imports in IDEA automatically)
 * OSGI manifest entries
+* Automatic-Module-Name
 
 Usage
 -----
@@ -40,4 +41,5 @@ Author
 ------
 
 JGraphX: JGraph Ltd
+
 Packaging: Vladimir Sitnikov <sitnikov.vladimir@gmail.com>
