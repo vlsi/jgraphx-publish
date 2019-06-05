@@ -21,7 +21,7 @@ Usage
 <dependency>
     <groupId>com.github.vlsi.mxgraph</groupId>
     <artifactId>jgraphx</artifactId>
-    <version>3.9.8.1</version>
+    <version>4.0.0</version>
 </dependency>
 ```
 
