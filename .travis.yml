@@ -1,6 +1,6 @@
 sudo: false
 language: java
-jdk: oraclejdk8
+jdk: openjdk8
 
 # Skip default Travis ./gradle check script as the project has no tests
 script: true
