@@ -1,6 +1,6 @@
 JGraphX package
 ---------------
-[![Build Status](https://travis-ci.org/vlsi/jgraphx-publish.svg?branch=master)](https://travis-ci.org/vlsi/jgraphx-publish)
+[![Build Status](https://travis-ci.com/vlsi/jgraphx-publish.svg?branch=master)](https://travis-ci.com/vlsi/jgraphx-publish)
 [![Javadocs](http://javadoc.io/badge/com.github.vlsi.mxgraph/jgraphx.svg)](http://javadoc.io/doc/com.github.vlsi.mxgraph/jgraphx)
 
 JGraphX is a Java Swing diagramming (graph visualisation) library licensed under the BSD license (see https://github.com/jgraph/jgraphx)
